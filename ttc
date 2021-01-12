@@ -1,0 +1,128 @@
+import java.util.Scanner;
+
+public class TicTacToe{
+   
+  public static String[][] Board(){
+     String board[][] = new String [7][]; 
+     board[0] = new String[] {"-------------\n"};
+     board[1] = new String[] {"|", "   ", "|", "   ", "|", "   ", "|\n"};
+     board[2] = new String[] {"-------------\n"};
+     board[3] = new String[] {"|", "   ", "|", "   ", "|", "   ", "|\n"};
+     board[4] = new String[] {"-------------\n"};
+     board[5] = new String[] {"|", "   ", "|", "   ", "|", "   ", "|\n"};
+     board[6] = new String[] {"-------------\n"};
+      return board;
+   }
+  public static void boardPrint(String[][] Board){
+    for(int i = 0; i < Board.length; i++){
+      for(int j = 0; j < Board[i].length; j++){
+        System.out.print(Board[i][j]);
+      }
+    }
+  }
+   
+  public static void main(String[] args){
+      boardPrint(Board());
+      Scanner a = new Scanner(System.in);
+      
+      System.out.println("Which row would you like to place your 'X'?");
+      int x_input = a.nextInt();
+      System.out.println("Which column would you like to place your 'Y'?");
+      int y_input = a.nextInt();
+      boardPrint(newBoardUser(Board(), x_input, y_input));
+      
+     /* while(computerVictory(newBoardUser(Board(), x_input, y_input)) == false && userVictory(newBoardUser(Board(), x_input, y_input)) == false){
+      
+      
+        
+        if(computerVictory(newBoardUser(Board(), x_input, y_input)) == true){
+        System.out.println("The computer won! No surprise ;).");
+        break;
+      }
+      if(userVictory(newBoardUser(Board(), x_input, y_input)) == true){
+        System.out.println("You won! Big surprise ;).");
+        break; 
+   }
+                                                                                                                     
+  }*/
+  }
+   public static String[][] newBoardUser(String[][] oldBoard, int x_input, int y_input){ //adds X to the user specified spot
+     int x_out = x_input + (x_input - 1);
+     int y_out = y_input + (y_input - 1);
+     String[][] a = oldBoard;
+     a[x_out][y_out] = " X "; 
+     return a;
+   }
+   
+   public static String[][] newBoardComp(String[][] oldBoard){
+     String[][] a = oldBoard;
+     return a;
+}
+   public static boolean computerVictory(String[][] board) {
+        if ((board[0][0].equals(board[1][1]) && board[0][0].equals(board[2][2]))|| (board[0][2].equals(board[1][1]) && board[0][2].equals(board[2][0]))) { // diagonal
+            return true;
+        }
+        for (int i = 0; i < 3; ++i) {
+          if ((board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]))|| (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]))) { // column / row 
+            return true;}
+            }
+        return false;}
+       
+   public static boolean userVictory(String[][] board) {
+       int c = 0;
+     if ((board[0][0].equals(board[1][1]) && board[0][0].equals(board[2][2]))|| (board[0][2].equals(board[1][1]) && board[0][2].equals(board[2][0]))) { // diagonal
+            return true;
+        }
+        for (int i = 0; i < 3; ++i) {
+          if ((board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]))|| (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]))) { // column / row 
+            return true;
+          }
+            }
+        return false;
+   }
+  
+  
+  public static boolean turn(int c){
+    
+   if(c%2 == 0)
+   {return true;}
+   if(c%2 != 0){
+     return false;
+   }
+    return true;
+  }
+   
+  /* public int minimax(int depth, int turn) {  
+        if (userVictory()) return +1; 
+        if (computerVictory()) return -1;
+
+        List<Point> pointsAvailable = getAvailableStates();
+        if (pointsAvailable.isEmpty()) return 0; 
+ 
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+         
+        for (int i = 0; i < pointsAvailable.size(); ++i) {  
+            Point point = pointsAvailable.get(i);   
+            if (turn == 1) { 
+                placeAMove(point, 1); 
+                int currentScore = minimax(depth + 1, 2);
+                max = Math.max(currentScore, max);
+                
+                if(depth == 0)System.out.println("Score for position "+(i+1)+" = "+currentScore);
+                if(currentScore >= 0){ if(depth == 0) computersMove = point;} 
+                if(currentScore == 1){board[point.x][point.y] = 0; break;} 
+                if(i == pointsAvailable.size()-1 && max < 0){if(depth == 0)computersMove = point;}
+            } else if (turn == 2) {
+                placeAMove(point, 2); 
+                int currentScore = minimax(depth + 1, 1);
+                min = Math.min(currentScore, min); 
+                if(min == -1){board[point.x][point.y] = 0; break;}
+            }
+            board[point.x][point.y] = 0; //Reset this point
+        } 
+        return turn == 1?max:min;
+    }  
+    */
+}
+   
+   
